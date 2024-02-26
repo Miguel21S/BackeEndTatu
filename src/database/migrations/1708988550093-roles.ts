@@ -1,3 +1,4 @@
+
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class Roles1708988550093 implements MigrationInterface {

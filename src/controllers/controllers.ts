@@ -1,9 +1,10 @@
 
 import { Request ,Response } from "express";
+
 const getRoles = (req:Request, res:Response) =>{
-    res.json({
+    res.status(200).json({
         success: true,
-        message: "Roles"
+        message: "Mostrar Roles"
     });
 }
 
