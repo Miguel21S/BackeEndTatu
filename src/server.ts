@@ -16,10 +16,10 @@ app.get('/api', (req, res) => {
     });
 });
 
-app.get('/api/roles', controllers.getRoles);
+app.get('/api/users', controllers.getRoles);
 app.post('/api/roles', controllers.crearRoles);
-app.put('/api/roles', controllers.updateRoles);
-app.delete('/api/roles', controllers.deleteRoles);
+app.put('/api/users/profile/:id', controllers.updateRoles);
+app.delete('/api/users/:id', controllers.deleteRoles);
 
 AppDataSource.initialize()
     .then(() => {
