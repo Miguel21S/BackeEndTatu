@@ -31,3 +31,84 @@ AppDataSource.initialize()
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+// await queryRunner.createTable(
+//     new Table({
+//         name: "appointments",
+//         columns: [
+//             {
+//                 name: "id",
+//                 type: "int",
+//                 isPrimary: true,
+//                 isGenerated: true,
+//                 generationStrategy: "increment"
+//             },
+//             {
+//                 name: "appointments_date",
+//                 type: "timestamp",
+//                 isNullable: false,
+//             },
+//             {
+//                 name: "user_id",
+//                 type: "int",
+//                 isNullable: false,
+//             },
+//             {
+//                 name: "service_id",
+//                 type: "int",
+//                 isNullable: false,
+//             }
+//         ],
+//         foreignKeys: [
+//             {
+//                 columnNames: ["user_id"],
+//                 referencedTableName: "users",
+//                 referencedColumnNames: ["id"],
+//                 onDelete: "CASCADE"
+//             },
+//             {
+//                 columnNames: ["service_id"],
+//                 referencedTableName: "services",
+//                 referencedColumnNames: ["id"],
+//                 onDelete: "CASCADE"
+//             }
+//         ]
+//     }),
+//     true
+// );
+
+//               await queryRunner.createTable(
+        //     new Table({
+        //         name: "services",
+        //         columns: [
+        //             {
+        //                 name: "id",
+        //                 type: "int",
+        //                 isPrimary: true,
+        //                 isGenerated: true,
+        //                 generationStrategy: "increment",
+        //             },
+        //             {
+        //                 name: "service_name",
+        //                 type: "varchar",
+        //                 length: "255",
+        //                 isNullable: false
+        //             },
+        //             {
+        //                 name: "description",
+        //                 type: "test",
+        //                 length: "255"
+        //             },
+        //             {
+        //                 name: "created_at",
+        //                 type: "timestamp",
+        //                 default: "CURRENT_TIMESTAMP"
+        //             },
+        //             {
+        //                 name: "updated_at",
+        //                 type: "timestamp",
+        //                 default: "CURRENT_TIMESTAMP"
+        //             }
+        //         ]
+        //     })
+        // )

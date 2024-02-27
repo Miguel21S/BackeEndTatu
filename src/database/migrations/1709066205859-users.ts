@@ -17,30 +17,43 @@ export class Users1709066205859 implements MigrationInterface {
                     {
                         name: "name",
                         type: "varchar",
-                        length: "255"
+                        length: "255",
+                        isNullable: false
                     },
                     {
                         name: "lastname",
                         type: "varchar",
-                        length: "255"
+                        length: "255",
+                        isNullable: false
                     },
                     {
                         name: "email",
                         type: "varchar",
-                        length: "255"
+                        length: "255",
+                        isNullable: false
                     },
                     {
                         name: "password",
                         type: "varchar",
-                        length: "255"
+                        length: "255",
+                        isNullable: false
                     },
                     {
                         name: "role_id",
-                        type: "number",
+                        type: "int",
                         isNullable: false
                     }
+                ],
+                foreignKeys: [
+                    {
+                        columnNames: ["role_id"],
+                        referencedTableName: "roles",
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
+                    }
                 ]
-            })
+            }),
+            true
         );
     }
 
