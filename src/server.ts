@@ -5,8 +5,7 @@ import * as controllers from './controllers/controllers';
 import { AppDataSource } from './database/db';
 
 const app: Application = express();
-const PORT = process.env.PORT || 9998;~
-
+const PORT = process.env.PORT || 9998;
 app.use(express.json());
 
 app.get('/api', (req, res) => {
