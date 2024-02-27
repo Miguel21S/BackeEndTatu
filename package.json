@@ -12,7 +12,7 @@
     "run-migrations": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
     "revert-migrations": "typeorm-ts-node-commonjs migration:revert -d ./src/database/db.ts",
     "npx-creat-table-gestor": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
-    "npx-create-table": "typeorm migration:create ./src/database/migrations/"
+    "npx-create-table": "typeorm migration:create ./src/database/migrations/appointments"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
