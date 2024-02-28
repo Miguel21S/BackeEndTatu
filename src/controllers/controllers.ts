@@ -38,19 +38,4 @@ const crearRoles = async (req:Request, res:Response) => {
     }
     
 }
-
-const updateRoles = (req:Request, res:Response) => {
-    res.status(200).json({
-        success: true,
-        message: "Roles Actualizar"
-    });
-}
-
-const deleteRoles = (req:Request, res:Response) => {
-    res.status(200).json({
-        success: true,
-        message: "Roles Eliminar"
-    });
-}
-
-export { getRoles, crearRoles, updateRoles, deleteRoles}
+export { getRoles, crearRoles}

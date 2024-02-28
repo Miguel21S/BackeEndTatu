@@ -2,7 +2,9 @@
 import express, { Application } from 'express';
 import 'dotenv/config';
 import * as controllers from './controllers/controllers';
+import * as userControll from './controllers/userController';
 import { AppDataSource } from './database/db';
+import { registro } from './controllers/authController';
 
 const app: Application = express();
 const PORT = process.env.PORT || 9998;
@@ -15,10 +17,17 @@ app.get('/api', (req, res) => {
     });
 });
 
-app.get('/api/users', controllers.getRoles);
+//URL DE LA CLASE Controller
+app.get('/api/profile/roles/users', controllers.getRoles);
 app.post('/api/roles/users', controllers.crearRoles);
-app.put('/api/users/profile/:id', controllers.updateRoles);
-app.delete('/api/users/:id', controllers.deleteRoles);
+
+//URL DE LA CLASE authController
+app.post('/api/roles/registro', registro)
+
+//URL DE LA CLASE userController
+// app.get('/api/users', userControll.getUser);
+app.put('/api/users/profile/:id', userControll.updateRoles);
+app.delete('/api/users/:id', userControll.deleteRoles);
 
 AppDataSource.initialize()
     .then(() => {
