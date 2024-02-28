@@ -16,7 +16,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/api/users', controllers.getRoles);
-app.post('/api/roles', controllers.crearRoles);
+app.post('/api/roles/users', controllers.crearRoles);
 app.put('/api/users/profile/:id', controllers.updateRoles);
 app.delete('/api/users/:id', controllers.deleteRoles);
 
