@@ -1,17 +1,29 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 
-// const getUser = async (req:Request, res:Response) =>{
-//     try {
-//         // const users = await User.fi
-//     } catch (error) {
-        
-//     }
-//     res.status(200).json({
-//         success: true,
-//         message: "Mostrar Roles"
-//     });
-// }
+const getUser = async (req:Request, res:Response) =>{
+    try {
+        const users = await User.find({
+            select: {
+                id: true,
+                name: true,
+                lastname: true,
+                email: true
+            }
+        })
+        res.status(200).json({
+            success: true,
+            message: "Lista de usuario encontrado",
+            data: users
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Ocurrio un error al buscar usuario",
+            error: error
+        })
+    } 
+}
 
 const crearUser = async (req:Request, res:Response) => {
     try {
@@ -40,7 +52,6 @@ const crearUser = async (req:Request, res:Response) => {
         })
         
     }
-    
 }
 
 const updateRoles = (req:Request, res:Response) => {
@@ -56,5 +67,4 @@ const deleteRoles = (req:Request, res:Response) => {
         message: "Roles Eliminar"
     });
 }
-
-export {crearUser, updateRoles, deleteRoles}
+export {getUser, crearUser, updateRoles, deleteRoles}

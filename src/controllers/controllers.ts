@@ -35,7 +35,6 @@ const crearRoles = async (req:Request, res:Response) => {
             errro: error
         })
         
-    }
-    
+    }    
 }
 export { getRoles, crearRoles}
