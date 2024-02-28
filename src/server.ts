@@ -26,7 +26,7 @@ app.post('/api/roles/registro', registro)
 
 //URL DE LA CLASE userController
 app.get('/api/users', userControll.getUser);
-app.put('/api/users/profile/:id', userControll.updateUser);
+app.put('/api/users/profile/:id', userControll.getupdateUser);
 app.delete('/api/users/:id', userControll.deleteRoles);
 
 AppDataSource.initialize()

@@ -56,41 +56,62 @@ const crearUser = async (req:Request, res:Response) => {
     }
 }
 
-//MÉTODO BUSCAR USUARIO POR ID
-const updateUser= async (req:Request, res:Response) => {
+//MÉTODO EDITAR USUARIO POR
+const getupdateUser= async (req:Request, res:Response) => {
     try {
         const users = req.params.id;
+        const name = req.body.name;
+        const lastname = req.body.lastname;
+        const email = req.body.email;
+
+        //COMPROVAR SI USUARIO EXISTE
         const firstUser = await User.findOneBy({
             id: parseInt(users)
         });
 
-        const mostar = () => {
-            return firstUser?.name +" "+ firstUser?.lastname +" "+firstUser?.email;
-        }
         if(!users){
             return res.status(400).json({
                 success: false,
                 message: "Usuario no encontrado"
             })
         }
+        // ACTUALIZAR LOS DATOS DE USUARIO
+        const userUpdate = await User.update(
+            {
+                id: parseInt(users)
+            },
+            {
+                name: name,
+                lastname: lastname,
+                email: email
+            },
+        )
         res.status(200).json({
             success: true,
-            message: "Roles Actualizar",
-            data: mostar()
+            message: "Usuario actualizado con suceso",
+            data: userUpdate
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al buscar usuario",
+            message: "Error al actualizar usuario",
             error: error
         })
     }
 }
 
+//MÉTODO BUSCAR USUARIO POR EMAIL
+// const getUserByEmail = async (req: Request, res : Response) => {
+//     try {
+//         const
+//     } catch (error) {
+        
+//     }
+// }
 const deleteRoles = (req:Request, res:Response) => {
     res.status(200).json({
         success: true,
         message: "Roles Eliminar"
     });
 }
-export {getUser, crearUser, updateUser, deleteRoles}
+export {getUser, crearUser, getupdateUser, deleteRoles}
