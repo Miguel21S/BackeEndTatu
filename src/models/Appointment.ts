@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./User";
+import { Service } from "./Service";
 
 @Entity()
 export class Appointment extends BaseEntity{
@@ -18,4 +19,8 @@ export class Appointment extends BaseEntity{
     @ManyToOne(() => User, (user) => user.appointments)
     @JoinColumn({'name': 'user_id'})
     user!: User;
+
+    @ManyToOne(() => Service, (service) => service.appointments)
+    @JoinColumn({'name':'services_id'})
+    service!: Service;
 }
