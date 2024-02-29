@@ -1,5 +1,6 @@
 
 import bcrypt from 'bcrypt';
+import Jwt from "jsonwebtoken";
 import { Request, Response } from 'express';
 import { User } from '../models/User';
 
@@ -56,6 +57,75 @@ export const registro = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Error registering",
+            error: error
+        })
+    }
+}
+
+export const login = async (req: Request, res: Response) => {
+    try {
+         // RECUPERAR LA INFORMACIÓN
+         const email = req.body.email;
+         const password = req.body.password;
+
+         // VALIDACIÓN DE EMAIL Y PASSWORD
+         if(!email || !password){
+            return res.status(400).json({
+                success: false,
+                message: "Email y Password incorrecto"
+            })
+         }
+
+         const user = await User.findOne(
+            {
+                where:{
+                    email:email
+                },
+                relations:{
+                    role: true
+                },
+                select:{
+                    id:true,
+                    password:password,
+                    email:email
+                }
+            }
+         )
+         if(!user){
+            return res.status(400).json({
+                success: false,
+                message: "Datos invalidos"
+            })
+         }
+        const validarPassword = bcrypt.compareSync(password, user.password);
+        if(!validarPassword){
+            return res.status(400).json({
+                success: false,
+                message: "Password invalidos"
+            })
+        }
+
+        //CREAR TOKEN
+        const token = Jwt.sign(
+            {
+                roleId: user.id,
+                roleName: user.role.name
+            },
+            process.env.JWT_SECRET as string,
+            {
+                expiresIn: "2h"
+            }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: "Se ha loguiado con suceso",
+            token: token
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al intentar registrarse",
             error: error
         })
     }

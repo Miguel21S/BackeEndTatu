@@ -4,7 +4,7 @@ import 'dotenv/config';
 import * as controllers from './controllers/controllers';
 import * as userControll from './controllers/userController';
 import { AppDataSource } from './database/db';
-import { registro } from './controllers/authController';
+import { login, registro } from './controllers/authController';
 
 const app: Application = express();
 const PORT = process.env.PORT || 9998;
@@ -18,18 +18,18 @@ app.get('/api', (req, res) => {
 });
 
 //URL DE LA CLASE Controller
-app.get('/api/users/roles', controllers.getRoles);
+app.get('/api/users/roles', controllers.getUser);
 app.post('/api/roles/users', controllers.crearRoles);
+app.get('/api/users/profile', controllers.getUserByEmail);
+app.put('/api/users/:id', controllers.updateRoles);
+app.delete('/api/users/:id', controllers.deleteUserById);
 
 //URL DE LA CLASE authController
 app.post('/api/roles/registro', registro)
+app.post('/api/login', login);
 
 //URL DE LA CLASE userController
-app.get('/api/users', userControll.getUser);
 app.put('/api/users/profile/:id', userControll.getupdateUser);
-app.get('/api/users/profile', userControll.getUserByEmail)
-app.put('/api/users/:id', userControll.updateRoles);
-app.delete('/api/users/:id', userControll.deleteUserById);
 
 AppDataSource.initialize()
     .then(() => {
