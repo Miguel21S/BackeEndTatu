@@ -5,6 +5,8 @@ import * as controllers from './controllers/controllers';
 import * as userControll from './controllers/userController';
 import { AppDataSource } from './database/db';
 import { login, register } from './controllers/authController';
+import { auth } from './middlewares/auth';
+import { isSuperAdmin } from './middlewares/isSuperAdmin';
 
 const app: Application = express();
 const PORT = process.env.PORT || 9998;
@@ -18,11 +20,11 @@ app.get('/api', (req, res) => {
 });
 
 //URL DE LA CLASE Controller
-app.get('/api/users', controllers.getUser);
+app.get('/api/users', auth, isSuperAdmin, controllers.getUser);
 app.post('/api/roles/users', controllers.crearRoles);
-app.get('/api/users/email', controllers.getUserByEmail);
-app.put('/api/roles/users/:id', controllers.updateRoles);  //*
-app.delete('/api/users/:id', controllers.deleteUserById);
+app.get('/api/users/email', isSuperAdmin, controllers.getUserByEmail);
+app.put('/api/roles/users/:id', isSuperAdmin, controllers.updateRoles);  //*
+app.delete('/api/users/:id', isSuperAdmin, controllers.deleteUserById);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)
