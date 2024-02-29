@@ -18,7 +18,7 @@ app.get('/api', (req, res) => {
 });
 
 //URL DE LA CLASE Controller
-app.get('/api/profile/roles/users', controllers.getRoles);
+app.get('/api/users/roles', controllers.getRoles);
 app.post('/api/roles/users', controllers.crearRoles);
 
 //URL DE LA CLASE authController
@@ -28,7 +28,8 @@ app.post('/api/roles/registro', registro)
 app.get('/api/users', userControll.getUser);
 app.put('/api/users/profile/:id', userControll.getupdateUser);
 app.get('/api/users/profile', userControll.getUserByEmail)
-app.delete('/api/users/:id', userControll.deleteRoles);
+app.put('/api/users/:id', userControll.updateRoles);
+app.delete('/api/users/:id', userControll.deleteUserById);
 
 AppDataSource.initialize()
     .then(() => {

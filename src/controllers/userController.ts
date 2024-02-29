@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
+import { Role } from "../models/Role";
 
 //MÉTODO LISTAR USUARIOS
-const getUser = async (req:Request, res:Response) =>{
+const getUser = async (req: Request, res: Response) => {
     try {
         const users = await User.find({
             select: {
@@ -23,23 +24,23 @@ const getUser = async (req:Request, res:Response) =>{
             message: "Ocurrio un error al buscar usuario",
             error: error
         })
-    } 
+    }
 }
 
 //MÉTODO CREAR ROLES
-const crearUser = async (req:Request, res:Response) => {
+const crearUser = async (req: Request, res: Response) => {
     try {
         const name = req.body.name;
 
-        if(name.length > 50){
+        if (name.length > 50) {
             return res.status(400).json({
                 success: true,
                 message: "El nombre es muy largo"
             })
         }
-        
+
         const newRole = await User.create({
-            name:name,
+            name: name,
         }).save()
 
         res.status(200).json({
@@ -49,15 +50,15 @@ const crearUser = async (req:Request, res:Response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al crear Role", 
+            message: "Error al crear Role",
             errro: error
         })
-        
+
     }
 }
 
 //MÉTODO EDITAR USUARIO POR
-const getupdateUser= async (req:Request, res:Response) => {
+const getupdateUser = async (req: Request, res: Response) => {
     try {
         const users = req.params.id;
         const name = req.body.name;
@@ -69,7 +70,7 @@ const getupdateUser= async (req:Request, res:Response) => {
             id: parseInt(users)
         });
 
-        if(!users){
+        if (!users) {
             return res.status(400).json({
                 success: false,
                 message: "Usuario no encontrado"
@@ -101,16 +102,16 @@ const getupdateUser= async (req:Request, res:Response) => {
 }
 
 //MÉTODO BUSCAR USUARIO POR EMAIL
-const getUserByEmail = async (req: Request, res : Response) => {
+const getUserByEmail = async (req: Request, res: Response) => {
     try {
-        
+
         const email = req.body.email;
         //COMPROVAR SI USUARIO EXISTE
         const user = await User.findBy({
             email: email
         })
 
-        if(!email){
+        if (!email) {
             return res.status(400).json({
                 success: false,
                 message: "Usuario no encontrado"
@@ -129,10 +130,75 @@ const getUserByEmail = async (req: Request, res : Response) => {
         })
     }
 }
-const deleteRoles = (req:Request, res:Response) => {
-    res.status(200).json({
-        success: true,
-        message: "Roles Eliminar"
-    });
+
+//MÉTODO ACTUALIZAR ROLE
+const updateRoles = async(req: Request, res: Response) => {
+    try {
+        const users = req.params.id;
+        const name = req.body.name;
+        //COMPROVAR SI USUARIO EXISTE
+        const user = await User.findOneBy({
+            id: parseInt(users)
+
+        }
+        );
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Usuario encontrado"
+            })
+        }
+
+        // ACTUALIZAR LOS DATOS DE USUARIO
+        const userUpdate = await Role.update(
+            {
+                id: parseInt(users)
+            },
+            {
+                name: name
+            },
+        )
+        res.status(200).json({
+            success: true,
+            message: "Roles actualizado con suceso",
+            data: userUpdate
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al intentar actualizar el role",
+            error: error
+        })
+    }
 }
-export {getUser, crearUser, getupdateUser, getUserByEmail, deleteRoles}
+
+//MÉTODO DELETE USUARIO
+const deleteUserById = async (req: Request, res: Response) => {
+    try {
+        const users = req.params.id;
+        const name = req.body.name;
+
+        //COMPROVAR SI USUARIO EXISTE
+        const userToRemove: any = await User.findOneBy(
+            {
+                id: parseInt(users)
+            }
+        )
+
+        const deletado = await User.delete(userToRemove);
+        //DEVOLVER LA RESPUESTA TRUE
+        res.status(200).json({
+            success: true,
+            message: "Usuario eliminado con suceso",
+            data: deletado
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al intentar eliminar usuario",
+            error: error
+        })
+    }
+}
+
+export { getUser, crearUser, getupdateUser, getUserByEmail, updateRoles, deleteUserById }

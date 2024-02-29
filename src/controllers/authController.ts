@@ -61,10 +61,5 @@ export const registro = async (req: Request, res: Response) => {
     }
 }
 
-const updateRoles = (req:Request, res:Response) => {
-    res.status(200).json({
-        success: true,
-        message: "Roles Actualizar"
-    });
-}
+
 
