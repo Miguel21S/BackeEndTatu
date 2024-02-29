@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { User } from '../models/User';
 
 
-export const registro = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response) => {
     try {
         
         const name = req.body.name;
