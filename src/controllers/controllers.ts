@@ -61,8 +61,9 @@ const getUser = async (req: Request, res: Response) => {
 //MÉTODO ACTUALIZAR ROLE {*}
 const updateRoles = async(req: Request, res: Response) => {
     try {
+        
         const users = req.params.id;
-        const name = req.body.name;
+        const role_id = req.body.role_id;
         //COMPROVAR SI USUARIO EXISTE
         const user = await User.findOneBy({
             id: parseInt(users)
@@ -77,12 +78,12 @@ const updateRoles = async(req: Request, res: Response) => {
         }
 
         // ACTUALIZAR LOS DATOS DE USUARIO
-        const userUpdate = await Role.update(
+        const userUpdate = await User.update(
             {
                 id: parseInt(users)
             },
             {
-                name: name
+                role_id: role_id
             },
         )
         res.status(200).json({

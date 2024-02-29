@@ -4,7 +4,7 @@ import 'dotenv/config';
 import * as controllers from './controllers/controllers';
 import * as userControll from './controllers/userController';
 import { AppDataSource } from './database/db';
-import { login, register } from './controllers/authController';
+import { login, register, registerAdministradores } from './controllers/authController';
 import { auth } from './middlewares/auth';
 import { isSuperAdmin } from './middlewares/isSuperAdmin';
 
@@ -21,13 +21,14 @@ app.get('/api', (req, res) => {
 
 //URL DE LA CLASE Controller
 app.get('/api/users', auth, isSuperAdmin, controllers.getUser);
-app.post('/api/roles/users', controllers.crearRoles);
-app.get('/api/users/email', isSuperAdmin, controllers.getUserByEmail);
-app.put('/api/roles/users/:id', isSuperAdmin, controllers.updateRoles);  //*
-app.delete('/api/users/:id', isSuperAdmin, controllers.deleteUserById);
+app.post('/api/roles/users',auth, controllers.crearRoles);
+app.get('/api/users/email', auth, isSuperAdmin, controllers.getUserByEmail);
+app.put('/api/roles/users/:id', auth, isSuperAdmin, controllers.updateRoles);  //*
+app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)
+app.post('/api/auth/superadmin', registerAdministradores);
 app.post('/api/auth/login', login);
 
 //URL DE LA CLASE userController
