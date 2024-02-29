@@ -101,17 +101,38 @@ const getupdateUser= async (req:Request, res:Response) => {
 }
 
 //MÉTODO BUSCAR USUARIO POR EMAIL
-// const getUserByEmail = async (req: Request, res : Response) => {
-//     try {
-//         const
-//     } catch (error) {
+const getUserByEmail = async (req: Request, res : Response) => {
+    try {
         
-//     }
-// }
+        const email = req.body.email;
+        //COMPROVAR SI USUARIO EXISTE
+        const user = await User.findBy({
+            email: email
+        })
+
+        if(!email){
+            return res.status(400).json({
+                success: false,
+                message: "Usuario no encontrado"
+            })
+        }
+        res.status(200).json({
+            success: true,
+            message: "Usuario encontrado",
+            data: user
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al buscar usuario",
+            error: error
+        })
+    }
+}
 const deleteRoles = (req:Request, res:Response) => {
     res.status(200).json({
         success: true,
         message: "Roles Eliminar"
     });
 }
-export {getUser, crearUser, getupdateUser, deleteRoles}
+export {getUser, crearUser, getupdateUser, getUserByEmail, deleteRoles}
