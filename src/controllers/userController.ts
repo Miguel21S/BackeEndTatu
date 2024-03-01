@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
+// import { Appointment } from "../models/Appointment";
+// import { Service } from "../models/Service";
 
-//MÉTODO EDITAR USUARIO POR
+//MÉTODO EDITAR USUARIO POR PIRFIL (RETIFICAR)
 const getupdateUser = async (req: Request, res: Response) => {
     try {
         const users = req.params.id;
@@ -44,7 +46,5 @@ const getupdateUser = async (req: Request, res: Response) => {
         })
     }
 }
-
-
 
 export { getupdateUser}

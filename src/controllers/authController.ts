@@ -7,7 +7,6 @@ import { User } from '../models/User';
 //MÉTODO REGISTRAR USUARIO
 export const register = async (req: Request, res: Response) => {
     try {
-        
         const name = req.body.name;
         const lastname = req.body.lastname
         const email = req.body.email;
@@ -36,8 +35,7 @@ export const register = async (req: Request, res: Response) => {
 
         // CREACIÓN DEL USUARIO
         // console.log(passwordEncrypted);
-
-        const newUser = await User.create(
+        const nuevoUser = await User.create(
             {
                 name: name,
                 lastname: lastname,
@@ -56,7 +54,7 @@ export const register = async (req: Request, res: Response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error registering",
+            message: "Error al registrarse",
             error: error
         })
     }
@@ -65,7 +63,6 @@ export const register = async (req: Request, res: Response) => {
 // ///// MÉTODO REGISTRAR ADMIN Y SUPERADMIN
 export const registerAdministradores = async (req: Request, res: Response) => {
     try {
-        
         const name = req.body.name;
         const lastname = req.body.lastname
         const email = req.body.email;
@@ -94,7 +91,6 @@ export const registerAdministradores = async (req: Request, res: Response) => {
 
         // CREACIÓN DEL USUARIO
         // console.log(passwordEncrypted);
-
         const newUser = await User.create(
             {
                 name: name,

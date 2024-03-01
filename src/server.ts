@@ -28,7 +28,7 @@ app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)
-app.post('/api/auth/superadmin', registerAdministradores);
+app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
 
 //URL DE LA CLASE userController

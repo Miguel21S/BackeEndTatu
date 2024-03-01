@@ -1,4 +1,6 @@
 
+// IMPORTAR FUNCIONES O DEPENDECIAS
+
 import { NextFunction, Request, Response } from "express";
 import Jwt from "jsonwebtoken";
 import { TokenData } from "../types";
@@ -13,6 +15,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
             })
         }
 
+        //VERIFICACIÓN DEL TOKEN
         const decode = Jwt.verify(
             token,
             process.env.JWT_SECRET as string

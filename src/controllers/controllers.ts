@@ -1,22 +1,22 @@
 
-import { Request ,Response } from "express";
+import { Request, Response } from "express";
 import { Role } from "../models/Role";
 import { User } from "../models/User";
 
 //MÉTODO CREAR ROLES
-const crearRoles = async (req:Request, res:Response) => {
+const crearRoles = async (req: Request, res: Response) => {
     try {
         const name = req.body.name;
 
-        if(name.length > 50){
+        if (name.length > 50) {
             return res.status(400).json({
                 success: true,
                 message: "El nombre es muy largo"
             })
         }
-        
+
         const newRole = await Role.create({
-            name:name
+            name: name
         }).save()
 
         res.status(200).json({
@@ -26,11 +26,11 @@ const crearRoles = async (req:Request, res:Response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al crear Role", 
+            message: "Error al crear Role",
             errro: error
         })
-        
-    }    
+
+    }
 }
 
 //MÉTODO LISTAR USUARIOS
@@ -59,16 +59,16 @@ const getUser = async (req: Request, res: Response) => {
 }
 
 //MÉTODO ACTUALIZAR ROLE {*}
-const updateRoles = async(req: Request, res: Response) => {
+const updateRoles = async (req: Request, res: Response) => {
     try {
-        
         const users = req.params.id;
         const role_id = req.body.role_id;
-        //COMPROVAR SI USUARIO EXISTE
-        const user = await User.findOneBy({
-            id: parseInt(users)
 
-        }
+        //COMPROVAR SI USUARIO EXISTE
+        const user = await User.findOneBy(
+            {
+                id: parseInt(users)
+            }
         );
         if (!user) {
             return res.status(404).json({
@@ -103,8 +103,8 @@ const updateRoles = async(req: Request, res: Response) => {
 //MÉTODO BUSCAR USUARIO POR EMAIL
 const getUserByEmail = async (req: Request, res: Response) => {
     try {
-
         const email = req.body.email;
+        
         //COMPROVAR SI USUARIO EXISTE
         const user = await User.findOne({
             where: {
@@ -145,7 +145,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
 const deleteUserById = async (req: Request, res: Response) => {
     try {
         const users = req.params.id;
-        
+
         //COMPROVAR SI USUARIO EXISTE
         const userToRemove: any = await User.findOneBy(
             {
@@ -168,4 +168,4 @@ const deleteUserById = async (req: Request, res: Response) => {
         })
     }
 }
-export { getUser, updateRoles, crearRoles, getUserByEmail, deleteUserById}
+export { getUser, updateRoles, crearRoles, getUserByEmail, deleteUserById }
