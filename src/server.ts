@@ -12,17 +12,17 @@ const app: Application = express();
 const PORT = process.env.PORT || 9998;
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-    res.json({
-        success: true,
-        message: 'Hello World!'
-    });
-});
+// app.get('/api', (req, res) => {
+//     res.json({
+//         success: true,
+//         message: 'Hello World!'
+//     });
+// });
 
 //URL DE LA CLASE Controller
 app.get('/api/users', auth, isSuperAdmin, controllers.getUser);
 app.post('/api/roles/users',auth, controllers.crearRoles);
-app.get('/api/users/email', auth, isSuperAdmin, controllers.getUserByEmail);
+app.get('/api', auth, isSuperAdmin, controllers.getUserByEmail);
 app.put('/api/roles/users/:id', auth, isSuperAdmin, controllers.updateRoles);  //*
 app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
 

@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 import { Role } from "../models/Role";
 import { User } from "../models/User";
+import { FindOperators } from "typeorm";
 
 //MÉTODO CREAR ROLES
 const crearRoles = async (req: Request, res: Response) => {
@@ -103,34 +104,41 @@ const updateRoles = async (req: Request, res: Response) => {
 //MÉTODO BUSCAR USUARIO POR EMAIL
 const getUserByEmail = async (req: Request, res: Response) => {
     try {
-        const email = req.body.email;
-        if (!email) {
-            return res.status(400).json({
-                success: false,
-                message: "Usuario no encontrado"
-            })
-        }
-        //COMPROVAR SI USUARIO EXISTE
-        const user = await User.findOne({
-            where: {
-                email: email
-            },
-            // relations: {
-            //     role: true
-            // },
-            select: {
-                id: true,
-                name: true,
-                lastname: true,
-                email: true
-            }
-        })
+        const email = req.query.email;
+        const name = req.query.name;
 
-        
+        interface queryFiltersI {
+            email?: string
+            name?: string
+        }
+
+        let queryFilters: queryFiltersI = {}        
+
+        if (email) {
+            queryFilters.email = email as string
+        }
+
+        if (name) {
+            queryFilters.name = name as string
+        }
+
+        const users = await User.find(
+            {
+                where: queryFilters,
+                select:{
+                    id: true,
+                    name: true,
+                    lastname: true,
+                    email: true,
+                    role_id: true
+                }
+            }
+        )
+
         res.status(200).json({
             success: true,
-            message: "Usuario encontrado",
-            data: user
+            message: "users retrieved successfully",
+            data: users
         })
     } catch (error) {
         res.status(500).json({
