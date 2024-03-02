@@ -101,6 +101,40 @@ const updateRoles = async (req: Request, res: Response) => {
     }
 }
 
+/////// MÉTODO ELIMINAR ROLE
+
+const eliminarRole = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+
+        const buscarRole = await Role.findOne(
+            {
+                where:{
+                    id: parseInt(id)
+                }
+            }
+        )
+
+        if(!buscarRole){
+            return res.status(404).json({
+                success: false,
+                message: "Este role no existe"
+            })
+        }
+
+        const eminar = await Role.remove(buscarRole)
+        res.status(200).json({
+            success: true,
+            message: "Role eliminado con suceso"
+        })
+    } catch (error) {
+        res.status(200).json({
+            success: false,
+            message: "Error al intentar eliminar role"
+        })
+    }
+}
+
 //MÉTODO BUSCAR USUARIO POR EMAIL
 const getUserByEmail = async (req: Request, res: Response) => {
     try {
@@ -177,6 +211,7 @@ const deleteUserById = async (req: Request, res: Response) => {
     }
 }
 
+//////// MÉTODO CREAR SERVICIO
 const crearServicio = async (req: Request, res: Response) => {
     try {
         const service_name = req.body.service_name;
@@ -202,6 +237,8 @@ const crearServicio = async (req: Request, res: Response) => {
     }
 }
 
+
+////////// MÉTODO EDITAR SERVICIO
 const editarServicio = async (req: Request, res: Response) => {
     try {
         const serviceId = req.params.id;
@@ -241,6 +278,7 @@ const editarServicio = async (req: Request, res: Response) => {
     }
 }
 
+////////// MÉTODO ELIMINAR SERVICIO
 const deleteServicio = async (req: Request, res: Response) => {
     try {
         const serviceId = parseInt(req.params.id);
@@ -279,5 +317,6 @@ const deleteServicio = async (req: Request, res: Response) => {
 export {
     crearRoles, getUser, updateRoles,
     getUserByEmail, deleteUserById,
-    crearServicio, editarServicio, deleteServicio
+    crearServicio, editarServicio, deleteServicio,
+    eliminarRole
 }
