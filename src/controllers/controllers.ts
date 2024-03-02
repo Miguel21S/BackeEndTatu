@@ -245,7 +245,20 @@ const deleteServicio = async (req: Request, res: Response) => {
     try {
         const serviceId = parseInt(req.params.id);
 
-        const buscarServicio = await Service.findBy({ id: serviceId })        
+        const buscarServicio = await Service.findOne(
+            {
+                where: {
+                    id: serviceId
+                }
+            }
+        )
+        
+        if (!buscarServicio) {
+            return res.status(404).json({
+                success: false,
+                message: "No existe el servicio"
+            })
+        }
         const eliminar = await Service.remove(buscarServicio)
 
         res.status(200).json(
