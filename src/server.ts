@@ -27,6 +27,7 @@ app.put('/api/users/:id', auth, isSuperAdmin, controllers.updateRoles);
 app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
 app.post('/api/services', auth, isSuperAdmin, controllers.crearServicio);
 app.put('/api/services/:id', auth, isSuperAdmin, controllers.editarServicio);
+app.delete('/api/services/:id', auth, isSuperAdmin, controllers.deleteServicio);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)

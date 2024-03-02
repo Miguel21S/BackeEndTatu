@@ -241,8 +241,30 @@ const editarServicio = async (req: Request, res: Response) => {
     }
 }
 
+const deleteServicio = async (req: Request, res: Response) => {
+    try {
+        const serviceId = parseInt(req.params.id);
+
+        const buscarServicio = await Service.findBy({ id: serviceId })        
+        const eliminar = await Service.remove(buscarServicio)
+
+        res.status(200).json(
+            {
+                success: true,
+                message: "Servicio eliminado con suceso"
+            }
+        )
+    } catch (error) {
+        res.status(200).json(
+            {
+                success: false,
+                message: "Error al intentar eliminar servicio"
+            }
+        )
+    }
+}
 export {
     crearRoles, getUser, updateRoles,
     getUserByEmail, deleteUserById,
-    crearServicio, editarServicio
+    crearServicio, editarServicio, deleteServicio
 }
