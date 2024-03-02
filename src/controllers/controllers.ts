@@ -104,7 +104,12 @@ const updateRoles = async (req: Request, res: Response) => {
 const getUserByEmail = async (req: Request, res: Response) => {
     try {
         const email = req.body.email;
-        
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Usuario no encontrado"
+            })
+        }
         //COMPROVAR SI USUARIO EXISTE
         const user = await User.findOne({
             where: {
@@ -121,12 +126,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
             }
         })
 
-        if (!email) {
-            return res.status(400).json({
-                success: false,
-                message: "Usuario no encontrado"
-            })
-        }
+        
         res.status(200).json({
             success: true,
             message: "Usuario encontrado",
