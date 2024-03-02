@@ -36,6 +36,10 @@ const userSeedDatabase = async () => {
         await AppDataSource.initialize();
         const users = manuallyFillUsers();
         await User.save(users);
+
+        console.log('---------------------------');
+        console.log('Los usuarios se han guardado correctamente');
+        console.log('---------------------------');
     } catch (error) {
         console.log(error);
     }

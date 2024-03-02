@@ -1,8 +1,43 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
-// import { Appointment } from "../models/Appointment";
 // import { Service } from "../models/Service";
+// import { Appointment } from "../models/Appointment";
 
+///// MÉTODO CREAR CITAS
+/*
+const Appointments = async (req: Request, res: Response) => {
+    try {
+        const user_id = req.params.id;
+        const services_id = req.params.id;
+
+        const userFind = await User.findBy({ id: parseInt(user_id) })
+        const servicesFind = await Service.findBy( { id: parseInt(services_id) })
+
+        if(!userFind || !servicesFind){
+            return res.status(404).json({
+                success: false,
+                message: "Usuario y Servicio no existen"
+            })
+        }
+
+        const cita = await Appointment.create(
+            {
+                user_id:user_id,
+                services_id:services_id
+            }
+        ).save();
+        res.status(200).json({
+            success: true,
+            message: "Cita marcada con succeso"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al crear la cita",
+            error: error
+        })
+    }
+}*/
 //MÉTODO EDITAR USUARIO POR PIRFIL (RETIFICAR)
 const getupdateUser = async (req: Request, res: Response) => {
     try {
@@ -12,12 +47,9 @@ const getupdateUser = async (req: Request, res: Response) => {
         const email = req.body.email;
 
         //COMPROVAR SI USUARIO EXISTE
-        const firstUser = await User.findOneBy({
-            id: parseInt(users)
-        });
 
         if (!users) {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "Usuario no encontrado"
             })
@@ -47,4 +79,4 @@ const getupdateUser = async (req: Request, res: Response) => {
     }
 }
 
-export { getupdateUser}
+export { getupdateUser }

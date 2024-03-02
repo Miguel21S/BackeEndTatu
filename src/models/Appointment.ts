@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Timestamp } from "typeorm"
 import { User } from "./User";
 import { Service } from "./Service";
 
-@Entity('Appointments')
+@Entity('appointments')
 export class Appointment extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;

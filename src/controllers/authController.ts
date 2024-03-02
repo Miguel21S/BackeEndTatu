@@ -127,7 +127,7 @@ export const login = async (req: Request, res: Response) => {
          if(!email || !password){
             return res.status(400).json({
                 success: false,
-                message: "Email y Password incorrecto"
+                message: "Datos del login incorrecto"
             })
          }
 
@@ -171,7 +171,7 @@ export const login = async (req: Request, res: Response) => {
                 expiresIn: "2h"
             }
         )
-
+        
         res.status(200).json({
             success: true,
             message: "Se ha loguiado con suceso",

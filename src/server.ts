@@ -23,8 +23,9 @@ app.use(express.json());
 app.get('/api/users', auth, isSuperAdmin, controllers.getUser);
 app.post('/api/roles/users',auth, controllers.crearRoles);
 app.get('/api', auth, isSuperAdmin, controllers.getUserByEmail);
-app.put('/api/roles/users/:id', auth, isSuperAdmin, controllers.updateRoles);  //*
+app.put('/api/users/:id', auth, isSuperAdmin, controllers.updateRoles);
 app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
+app.post('/api/services', auth, isSuperAdmin, controllers.crearServicio);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)
@@ -32,7 +33,8 @@ app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
 
 //URL DE LA CLASE userController
-app.put('/api/users/profile/:id', userControll.getupdateUser);
+app.put('/api/users/profile', userControll.getupdateUser);
+// app.post('/api/appointments', userControll.Appointments);
 
 AppDataSource.initialize()
     .then(() => {

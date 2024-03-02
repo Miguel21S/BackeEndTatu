@@ -20,6 +20,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
             token,
             process.env.JWT_SECRET as string
         )
+        
         req.tokenData = decode as TokenData;
         next();
     } catch (error) {

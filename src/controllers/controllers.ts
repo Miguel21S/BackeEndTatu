@@ -2,7 +2,7 @@
 import { Request, Response } from "express";
 import { Role } from "../models/Role";
 import { User } from "../models/User";
-import { FindOperators } from "typeorm";
+import { Service } from "../models/Service";
 
 //MÉTODO CREAR ROLES
 const crearRoles = async (req: Request, res: Response) => {
@@ -74,7 +74,7 @@ const updateRoles = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "Usuario encontrado"
+                message: "Usuario no encontrado"
             })
         }
 
@@ -112,7 +112,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
             name?: string
         }
 
-        let queryFilters: queryFiltersI = {}        
+        let queryFilters: queryFiltersI = {}
 
         if (email) {
             queryFilters.email = email as string
@@ -125,7 +125,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
         const users = await User.find(
             {
                 where: queryFilters,
-                select:{
+                select: {
                     id: true,
                     name: true,
                     lastname: true,
@@ -137,7 +137,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
 
         res.status(200).json({
             success: true,
-            message: "users retrieved successfully",
+            message: "Usuario encontrado con suceso",
             data: users
         })
     } catch (error) {
@@ -176,4 +176,34 @@ const deleteUserById = async (req: Request, res: Response) => {
         })
     }
 }
-export { getUser, updateRoles, crearRoles, getUserByEmail, deleteUserById }
+
+const crearServicio = async (req: Request, res: Response) => {
+    try {
+        const service_name = req.body.service_name;
+        const description = req.body.description;
+
+        const servicio = await Service.create(
+            {
+                service_name: service_name,
+                description: description
+            }
+        ).save()
+
+        res.status(200).json({
+            success: true,
+            message: "Servicio creado con suceso"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al crear servicios",
+            error: error
+        })
+    }
+}
+
+export {
+    crearRoles, getUser, updateRoles,
+    getUserByEmail, deleteUserById,
+    crearServicio
+}
