@@ -1,31 +1,41 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
-// import { Service } from "../models/Service";
-// import { Appointment } from "../models/Appointment";
+import { Service } from "../models/Service";
+import { Appointment } from "../models/Appointment";
 
 ///// MÉTODO CREAR CITAS
-/*
 const Appointments = async (req: Request, res: Response) => {
     try {
-        const user_id = req.params.id;
-        const services_id = req.params.id;
+        // const user_id = req.params.id;
+        const {user_id, services_id} = req.body
 
-        const userFind = await User.findBy({ id: parseInt(user_id) })
-        const servicesFind = await Service.findBy( { id: parseInt(services_id) })
+        const findUserId = await User.findOneBy(
+            {
+                id:parseInt(user_id)
+            }
+        )
+        const findServices_id = await User.findOneBy(
+            {
+                id:parseInt(services_id)
+            }
+        )
 
-        if(!userFind || !servicesFind){
-            return res.status(404).json({
-                success: false,
-                message: "Usuario y Servicio no existen"
-            })
+        if(!findUserId || !findServices_id){
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Usuario o Servicio no encontrado"
+                }
+            )
         }
 
         const cita = await Appointment.create(
             {
-                user_id:user_id,
-                services_id:services_id
+                user_id: parseInt(user_id),
+                services_id: parseInt(services_id)
             }
-        ).save();
+        ).save()
+        
         res.status(200).json({
             success: true,
             message: "Cita marcada con succeso"
@@ -37,7 +47,8 @@ const Appointments = async (req: Request, res: Response) => {
             error: error
         })
     }
-}*/
+}
+
 //MÉTODO EDITAR USUARIO POR PIRFIL (RETIFICAR)
 const getupdateUser = async (req: Request, res: Response) => {
     try {
@@ -79,4 +90,4 @@ const getupdateUser = async (req: Request, res: Response) => {
     }
 }
 
-export { getupdateUser }
+export { getupdateUser, Appointments }
