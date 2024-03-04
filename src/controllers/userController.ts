@@ -7,20 +7,19 @@ import { Appointment } from "../models/Appointment";
 const Appointments = async (req: Request, res: Response) => {
     try {
         // const user_id = req.params.id;
-        const {user_id, services_id} = req.body
-
+        const { user_id, services_id } = req.body
         const findUserId = await User.findOneBy(
             {
-                id:parseInt(user_id)
+                id: parseInt(user_id)
             }
         )
         const findServices_id = await User.findOneBy(
             {
-                id:parseInt(services_id)
+                id: parseInt(services_id)
             }
         )
 
-        if(!findUserId || !findServices_id){
+        if (!findUserId || !findServices_id) {
             return res.status(404).json(
                 {
                     success: false,
@@ -35,7 +34,7 @@ const Appointments = async (req: Request, res: Response) => {
                 services_id: parseInt(services_id)
             }
         ).save()
-        
+
         res.status(200).json({
             success: true,
             message: "Cita marcada con succeso"
@@ -52,14 +51,22 @@ const Appointments = async (req: Request, res: Response) => {
 //MÉTODO EDITAR USUARIO POR PIRFIL (RETIFICAR)
 const getupdateUser = async (req: Request, res: Response) => {
     try {
-        const users = req.params.id;
+        console.log(req.tokenData);
+        
+        const id = req.tokenData.roleId;
         const name = req.body.name;
         const lastname = req.body.lastname;
         const email = req.body.email;
-
+        console.log(id);
         //COMPROVAR SI USUARIO EXISTE
-
-        if (!users) {
+        const findMyPerfil = await User.findOne(
+            {
+                where: {
+                    id: id
+                }
+            }
+        )
+        if (!findMyPerfil) {
             return res.status(404).json({
                 success: false,
                 message: "Usuario no encontrado"
@@ -68,24 +75,24 @@ const getupdateUser = async (req: Request, res: Response) => {
         // ACTUALIZAR LOS DATOS DE USUARIO
         const userUpdate = await User.update(
             {
-                id: parseInt(users)
+                id: id
             },
             {
                 name: name,
                 lastname: lastname,
                 email: email
-            },
+            }
         )
         res.status(200).json({
             success: true,
             message: "Usuario actualizado con suceso",
             data: userUpdate
         });
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             success: false,
             message: "Error al actualizar usuario",
-            error: error
+            error: error.message
         })
     }
 }

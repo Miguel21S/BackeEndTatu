@@ -7,6 +7,7 @@ import { AppDataSource } from './database/db';
 import { login, register, registerAdministradores } from './controllers/authController';
 import { auth } from './middlewares/auth';
 import { isSuperAdmin } from './middlewares/isSuperAdmin';
+import { isUser } from './middlewares/isUser';
 
 const app: Application = express();
 const PORT = process.env.PORT || 9998;
@@ -36,8 +37,8 @@ app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
 
 //URL DE LA CLASE userController
-app.put('/api/users/profile', userControll.getupdateUser);
-app.post('/api/appointments', userControll.Appointments);
+app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
+app.post('/api/appointments', auth, isUser, userControll.Appointments);
 
 AppDataSource.initialize()
     .then(() => {
