@@ -3,7 +3,7 @@ import { AppDataSource } from "../db";
 import { User } from '../../models/User';
 import bcrypt from 'bcrypt';
 
-const manuallyFillUsers = () => {
+const adtosUsers = () => {
     const users = [
         { name: "John", lastname: "Doe", email: "john@example.com", password: "joh11", role_id: 1 },
         { name: "Elena", lastname: "García", email: "elena@example.com", password: "elena123", role_id: 1 },
@@ -31,10 +31,10 @@ const manuallyFillUsers = () => {
     });
 };
 
-const userSeedDatabase = async () => {
+const userDatabase = async () => {
     try {
         await AppDataSource.initialize();
-        const users = manuallyFillUsers();
+        const users = adtosUsers();
         await User.save(users);
 
         console.log('---------------------------');
@@ -48,4 +48,4 @@ const userSeedDatabase = async () => {
     }
 };
 
-userSeedDatabase();
+userDatabase();

@@ -39,6 +39,7 @@ app.post('/api/auth/login', login);
 //URL DE LA CLASE userController
 app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
 app.post('/api/appointments', auth, isUser, userControll.Appointments);
+app.put('/api/appointments', auth, isUser, userControll.actualizarCita);
 
 AppDataSource.initialize()
     .then(() => {
