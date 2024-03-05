@@ -1,3 +1,6 @@
+
+////////////// ESTA CLASE SIRVE PARA DAR PERMISO SOLO A LOS USUARIOS NORMALES QUE TIENEN PERMISOS QUE NADIE MAS TIENE
+
 import { Request, Response, NextFunction } from "express";
 
 export const isUser = (req: Request, res: Response, next: NextFunction) => {

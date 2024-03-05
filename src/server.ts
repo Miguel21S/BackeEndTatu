@@ -1,4 +1,5 @@
 
+//////////////////////          IMPORTACIÓN DE LAS DEPENDENCIAS Y DE LOS FICHEROS
 import express, { Application } from 'express';
 import 'dotenv/config';
 import * as controllers from './controllers/controllers';
@@ -44,6 +45,7 @@ app.post('/api/appointments', auth, isUser, userControll.Appointments);
 app.put('/api/appointments', auth, userControll.actualizarCita);
 app.get('/api/appointments', auth, userControll.misCitas);
 
+//////////////    INIALIZACIÓN DE LA CONEXIÓN CON LA BASE DE DATOS
 AppDataSource.initialize()
     .then(() => {
         console.log('Database connected');

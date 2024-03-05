@@ -1,13 +1,14 @@
+
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import { Service } from "../models/Service";
 import { Appointment } from "../models/Appointment";
 
-// // // // MÉTODOS VER PERFIL
+// // // // MÉTODOS VER PERFIL DEL USUARIO
 const myPerfil = async (req: Request, res: Response) => {
     try {
         const id_user = req.tokenData.roleId;
-        
+
         const getPerfil = await User.findOne(
             {
                 where: {
@@ -109,9 +110,6 @@ const Appointments = async (req: Request, res: Response) => {
             }
         )
 
-        console.log(findUserId);
-        console.log(findServices_id)
-
         if (!findUserId || !findServices_id) {
             return res.status(404).json(
                 {
@@ -151,34 +149,13 @@ const actualizarCita = async (req: Request, res: Response) => {
 
         const findAppointment = await Appointment.findOne(
             {
-               where: {
-                id:id_appointments,
-                user: {id:user_id},
-               }
-            }
-        )
-        const findUser = await User.findOne(
-            {
                 where: {
-                    id: user_id
+                    id: id_appointments,
+                    user: { id: user_id },
                 }
             }
         )
 
-        console.log(findUser);
-        
-
-        const findServices = await Service.findOne(
-            {
-                where: {
-                    id: services_id,
-                    
-                }
-            }
-        )
-
-        console.log(findAppointment);
-        
         if (!findAppointment) {
             return res.status(404).json(
                 {
@@ -187,11 +164,13 @@ const actualizarCita = async (req: Request, res: Response) => {
                 }
             )
         }
-   
+
         const actualizando = await Appointment.update(
             {
                 id: id_appointments,
-                user: {id:user_id},
+                user: {
+                    id: user_id
+                },
             },
             {
                 id: id_appointments,
@@ -202,7 +181,7 @@ const actualizarCita = async (req: Request, res: Response) => {
             {
                 success: true,
                 message: "Cita actualizada con suceso",
-                data:actualizando
+                data: actualizando
             }
         )
     } catch (error) {
@@ -214,28 +193,28 @@ const actualizarCita = async (req: Request, res: Response) => {
     }
 }
 
+//MÉTODO QUE LISTA TODOS LAS CITAS DE UN USUARIO LOGUIADO
 const misCitas = async (req: Request, res: Response) => {
     try {
         const user_id = req.tokenData.roleId;
         const services_id = req.body.services_id;
-      
+
         const findUser = await User.findOne(
             {
-               where:{
-                    id:user_id
-              }
+                where: {
+                    id: user_id
+                }
             }
         )
         const findServices = await Service.findOne(
             {
                 where: {
-                    id:services_id
+                    id: services_id
                 }
             }
         )
-        console.log(findUser)
-        console.log(findServices)
-        if(!findUser || !findServices){
+       
+        if (!findUser || !findServices) {
             return res.status(404).json(
                 {
                     success: false,
@@ -245,12 +224,14 @@ const misCitas = async (req: Request, res: Response) => {
         }
         const findAllCitas = await Appointment.find(
             {
-                where:{
-                   user:{id:user_id} 
+                where: {
+                    user: {
+                        id: user_id
+                    }
                 },
             }
         )
-        console.log(findAllCitas)
+        
         res.status(200).json(
             {
                 success: true,
@@ -266,7 +247,7 @@ const misCitas = async (req: Request, res: Response) => {
                 error: error.message
             }
         )
-        
+
     }
 }
 

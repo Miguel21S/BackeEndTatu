@@ -4,7 +4,7 @@ import { Role } from "../models/Role";
 import { User } from "../models/User";
 import { Service } from "../models/Service";
 
-//MÉTODO CREAR ROLES
+//MÉTODO CREAR ROLES PARA LOS USUARIOS
 const crearRoles = async (req: Request, res: Response) => {
     try {
         const name = req.body.name;
@@ -64,7 +64,7 @@ const getUser = async (req: Request, res: Response) => {
     }
 }
 
-//MÉTODO ACTUALIZAR ROLE {*}
+//MÉTODO ACTUALIZAR ROLE
 const updateRoles = async (req: Request, res: Response) => {
     try {
         const users = req.params.id;
@@ -192,7 +192,6 @@ const deleteUserById = async (req: Request, res: Response) => {
     try {
         const users = req.params.id;
 
-        //COMPROVAR SI USUARIO EXISTE
         const userToRemove: any = await User.findOneBy(
             {
                 id: parseInt(users)
@@ -200,7 +199,7 @@ const deleteUserById = async (req: Request, res: Response) => {
         )
 
         const deletado = await User.delete(userToRemove);
-        //DEVOLVER LA RESPUESTA TRUE
+        
         res.status(200).json({
             success: true,
             message: "Usuario eliminado con suceso",
