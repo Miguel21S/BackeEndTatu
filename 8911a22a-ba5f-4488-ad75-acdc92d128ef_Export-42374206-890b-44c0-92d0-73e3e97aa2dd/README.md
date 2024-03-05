@@ -1,3 +1,4 @@
+
 # Gestión de citas para un estudio de tatuajes
 
 En este repositorio se encuentra una app que cumplen con certos requisitos de endpoints del parte de servidor. Los endpoints consiste en crear ciertas funcionalidades  e implementar URL especificas para que se puedan enviar sulicitudes HTTP para interactuar con un servicio de una app web. En los siguientes parrafos se abordara más acerca del proyecto y dela extructura del proyecto.
@@ -196,7 +197,7 @@ Al desarrollar este código, se incorporaron algunas validaciones esenciales par
 
 La siguiente imagen muestra el registro de un usuario en el sistema.
 
-![Captura de pantalla 2024-03-05 222919.png](Captura_de_pantalla_2024-03-05_222919.png)
+![Captura de pantalla 2024-03-05 222919.png](Captura de pantalla 2024-03-05 222919.png)
 
 Las siguientes líneas de código explican claramente cómo se creó el método de inicio de sesión y las validaciones que se implementarán. Además, se describe la funcionalidad para la creación del token de acceso, garantizando que solo los usuarios registrados puedan acceder al sistema.
 
