@@ -273,7 +273,7 @@ En las siguientes lineas se mostrarán algunos códigos de diferentes endpoints 
 
 La siguiente imagen se puede visualizar el logueo de un usuario.
 
-![Captura de pantalla 2024-03-05 224851.png](Captura_de_pantalla_2024-03-05_224851.png)
+![Captura de pantalla 2024-03-05 224851.png]({Captura de pantalla 2024-03-05 224851.png})
 
 El siguiente método se define los números de elementos a mostrar en cada pagina, y el limite de elementos establecido por el usuario. El método consiste en visualizar todos los usuarios del sistema.
 
