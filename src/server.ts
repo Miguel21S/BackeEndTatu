@@ -42,6 +42,7 @@ app.get('/api/users/profile', auth, userControll.myPerfil);
 //URL DE LA CLASE userController
 app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
 app.post('/api/appointments', auth, isUser, userControll.Appointments);
+app.get('/api/appointments/:id', auth, isUser, userControll.buscarCitaPorId);
 app.put('/api/appointments', auth, userControll.actualizarCita);
 app.get('/api/appointments', auth, userControll.misCitas);
 

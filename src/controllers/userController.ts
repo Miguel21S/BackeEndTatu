@@ -140,6 +140,67 @@ const Appointments = async (req: Request, res: Response) => {
     }
 }
 
+////////////////           MÉTODO BUSCAR CITAS
+const buscarCitaPorId = async (req: Request, res: Response) => {
+    try {
+        const id_user = req.tokenData.roleId;
+        const id_appointment = Number(req.params.id);
+
+        const findCita = await Appointment.findOne(
+            {
+                where: {
+                    id: id_appointment,
+                    user: {
+                        id:id_user
+                    }
+                },
+                select:{
+                    id: true,
+                    services_id: true,
+                    appointments_date: true
+                }
+            }
+        )
+
+        if (!findCita) {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "No existe la cita"
+                }
+            )
+        }
+
+        // const findAppointments = await Appointment.findOne(
+        //     {
+        //         where: {
+        //             id: id_appointment
+        //         },
+        //         select:{
+        //             id:true,
+        //             services_id:true,
+        //             appointments_date:true
+        //         }
+        //     }
+        // )
+
+        res.status(200).json(
+            {
+                success: true,
+                message: "Cita encontrada con suceso",
+                data:findCita
+            }
+        )
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Error al buscar la cita"
+            }
+        )
+
+    }
+}
 // // //MÉTODO ACTUALIZAR CITA
 const actualizarCita = async (req: Request, res: Response) => {
     try {
@@ -213,7 +274,7 @@ const misCitas = async (req: Request, res: Response) => {
                 }
             }
         )
-       
+
         if (!findUser || !findServices) {
             return res.status(404).json(
                 {
@@ -231,7 +292,7 @@ const misCitas = async (req: Request, res: Response) => {
                 },
             }
         )
-        
+
         res.status(200).json(
             {
                 success: true,
@@ -251,4 +312,7 @@ const misCitas = async (req: Request, res: Response) => {
     }
 }
 
-export { myPerfil, getupdateUser, Appointments, actualizarCita, misCitas }
+export {
+    myPerfil, getupdateUser, Appointments,
+    buscarCitaPorId, actualizarCita, misCitas
+}
