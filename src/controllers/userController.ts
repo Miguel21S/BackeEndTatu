@@ -7,9 +7,8 @@ import { Appointment } from "../models/Appointment";
 const myPerfil = async (req: Request, res: Response) => {
     try {
         const id_user = req.tokenData.roleId;
-
         
-        const verPerfil = await User.findOne(
+        const getPerfil = await User.findOne(
             {
                 where: {
                     id: id_user
@@ -27,7 +26,7 @@ const myPerfil = async (req: Request, res: Response) => {
             {
                 success: true,
                 message: "Datos carregados con suceso",
-                datos: verPerfil
+                datos: getPerfil
             }
         )
     } catch (error: any) {

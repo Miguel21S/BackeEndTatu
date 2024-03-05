@@ -35,9 +35,10 @@ app.delete('/api/role/:id', auth, isSuperAdmin, controllers.eliminarRole);
 app.post('/api/auth/register', register)
 app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
+app.get('/api/services', auth, controllers.getServices);
+app.get('/api/users/profile', auth, userControll.myPerfil);
 
 //URL DE LA CLASE userController
-app.get('/api/users/profile', auth, isUser, userControll.myPerfil);
 app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
 app.post('/api/appointments', auth, isUser, userControll.Appointments);
 app.put('/api/appointments', auth, isUser, userControll.actualizarCita);

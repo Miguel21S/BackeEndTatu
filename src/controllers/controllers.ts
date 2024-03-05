@@ -38,7 +38,7 @@ const crearRoles = async (req: Request, res: Response) => {
 const getUser = async (req: Request, res: Response) => {
     try {
         let limit = Number(req.query.limit) || 10
-        const page =Number( req.query.page) || 1 
+        const page = Number(req.query.page) || 1
         const skip = (page - 1) * limit
         const users = await User.find({
             select: {
@@ -241,6 +241,39 @@ const crearServicio = async (req: Request, res: Response) => {
     }
 }
 
+//////////MÉTODO VER TODO LOS SERVICIOS
+const getServices = async (req: Request, res: Response) => {
+    try {
+        const id_user = req.tokenData.roleId;
+
+        const getServicios = await Service.find(
+            {
+                select: {
+                    id: true,
+                    service_name: true,
+                    description: true
+                }
+            }
+        )
+        console.log(id_user)
+        res.status(200).json(
+            {
+                success: true,
+                message: "Servicios encontrado con suceso",
+                datos: getServicios
+            }
+        )
+    } catch (error: any) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Error al carregar los servicios",
+                error: error.message
+            }
+        )
+    }
+}
+
 ////////// MÉTODO EDITAR SERVICIO
 const editarServicio = async (req: Request, res: Response) => {
     try {
@@ -320,6 +353,6 @@ const deleteServicio = async (req: Request, res: Response) => {
 export {
     crearRoles, getUser, updateRoles,
     getUserByEmail, deleteUserById,
-    crearServicio, editarServicio, deleteServicio,
-    eliminarRole
+    crearServicio, getServices, editarServicio,
+    deleteServicio, eliminarRole
 }

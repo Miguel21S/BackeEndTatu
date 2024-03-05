@@ -15,9 +15,10 @@
     "start": "node ./dist/server.js",
     "run-migrations": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
     "revert-migrations": "npx typeorm-ts-node-commonjs migration:revert -d ./src/database/db.ts",
-    "seed": "ts-node ./src/database/seeders/seederUser.ts",
-    "npx-creat-table-en-bd": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
-    "npx-create-table": "typeorm migration:create ./src/database/migrations/"
+    "seed-roles": "ts-node ./src/database/seeders/seeder.ts",
+    "seed-users": "ts-node ./src/database/seeders/seederUser.ts",
+    "seed-services": "ts-node ./src/database/seeders/seederServices.ts",
+    "npx-create-table": "typeorm migration:create ./src/database/migrations/nombre de la tabla"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
