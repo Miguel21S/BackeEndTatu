@@ -109,12 +109,12 @@ const updateRoles = async (req: Request, res: Response) => {
 /////// MÉTODO ELIMINAR ROLE
 const eliminarRole = async (req: Request, res: Response) => {
     try {
-        const id = req.params.id;
+        const id_role = req.params.id;
 
         const buscarRole = await Role.findOne(
             {
                 where: {
-                    id: parseInt(id)
+                    id: parseInt(id_role)
                 }
             }
         )
