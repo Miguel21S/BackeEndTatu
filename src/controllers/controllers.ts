@@ -255,7 +255,7 @@ const getServices = async (req: Request, res: Response) => {
                 }
             }
         )
-        console.log(id_user)
+
         res.status(200).json(
             {
                 success: true,

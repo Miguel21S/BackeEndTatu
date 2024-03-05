@@ -171,7 +171,7 @@ const actualizarCita = async (req: Request, res: Response) => {
             }
         )
 
-        if (!findUser || !findServices) {
+        if (!findUser || !findAppointment) {
             return res.status(404).json(
                 {
                     success: false,
@@ -182,17 +182,19 @@ const actualizarCita = async (req: Request, res: Response) => {
 
         const actualizando = await Appointment.update(
             {
-                id: id_appointments,
+                // id: id_appointments,
                 user_id: user_id,
             },
             {
+                id: id_appointments,
                 services_id: services_id
             }
         )
         res.status(200).json(
             {
                 success: true,
-                message: "Cita actualizada con suceso"
+                message: "Cita actualizada con suceso",
+                data:actualizando
             }
         )
     } catch (error) {
@@ -204,4 +206,61 @@ const actualizarCita = async (req: Request, res: Response) => {
     }
 }
 
-export { myPerfil, getupdateUser, Appointments, actualizarCita }
+const misCitas = async (req: Request, res: Response) => {
+    try {
+        const user_id = req.tokenData.roleId;
+        const services_id = req.body.services_id;
+      
+        const findUser = await User.findOne(
+            {
+               where:{
+                    id:user_id
+              }
+            }
+        )
+        const findServices = await Service.findOne(
+            {
+                where: {
+                    id:services_id
+                }
+            }
+        )
+        console.log(findUser)
+        console.log(findServices)
+        if(!findUser || !findServices){
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Citas no encotradas"
+                }
+            )
+        }
+        const findAllCitas = await Appointment.find(
+            {
+                where:{
+                   user:{id:user_id} 
+                },
+               
+            }
+        )
+        console.log(findAllCitas)
+        res.status(200).json(
+            {
+                success: true,
+                message: "Lista de citas encontradas",
+                data: findAllCitas
+            }
+        )
+    } catch (error: any) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Error en encontrar todas las citas",
+                error: error.message
+            }
+        )
+        
+    }
+}
+
+export { myPerfil, getupdateUser, Appointments, actualizarCita, misCitas }
