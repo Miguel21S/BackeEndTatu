@@ -37,6 +37,7 @@ app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
 
 //URL DE LA CLASE userController
+app.get('/api/users/profile', auth, isUser, userControll.myPerfil);
 app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
 app.post('/api/appointments', auth, isUser, userControll.Appointments);
 app.put('/api/appointments', auth, isUser, userControll.actualizarCita);
