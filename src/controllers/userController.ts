@@ -149,12 +149,14 @@ const actualizarCita = async (req: Request, res: Response) => {
         const user_id = req.tokenData.roleId;
         const services_id = req.body.services_id;
 
-        const findAppointment = await Appointment.findOneBy(
+        const findAppointment = await Appointment.findOne(
             {
-                id: id_appointments
+               where: {
+                id:id_appointments,
+                user: {id:user_id},
+               }
             }
         )
-
         const findUser = await User.findOne(
             {
                 where: {
@@ -163,15 +165,21 @@ const actualizarCita = async (req: Request, res: Response) => {
             }
         )
 
+        console.log(findUser);
+        
+
         const findServices = await Service.findOne(
             {
                 where: {
-                    id: services_id
+                    id: services_id,
+                    
                 }
             }
         )
 
-        if (!findUser || !findAppointment) {
+        console.log(findAppointment);
+        
+        if (!findAppointment) {
             return res.status(404).json(
                 {
                     success: false,
@@ -179,11 +187,11 @@ const actualizarCita = async (req: Request, res: Response) => {
                 }
             )
         }
-
+   
         const actualizando = await Appointment.update(
             {
-                // id: id_appointments,
-                user_id: user_id,
+                id: id_appointments,
+                user: {id:user_id},
             },
             {
                 id: id_appointments,
@@ -240,7 +248,6 @@ const misCitas = async (req: Request, res: Response) => {
                 where:{
                    user:{id:user_id} 
                 },
-               
             }
         )
         console.log(findAllCitas)
