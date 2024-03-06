@@ -1,4 +1,3 @@
-
 # Gestión de citas para un estudio de tatuajes
 
 En este repositorio se encuentra una app que cumplen con certos requisitos de endpoints del parte de servidor. Los endpoints consiste en crear ciertas funcionalidades  e implementar URL especificas para que se puedan enviar sulicitudes HTTP para interactuar con un servicio de una app web. En los siguientes parrafos se abordara más acerca del proyecto y dela extructura del proyecto.
@@ -197,7 +196,7 @@ Al desarrollar este código, se incorporaron algunas validaciones esenciales par
 
 La siguiente imagen muestra el registro de un usuario en el sistema.
 
-![Captura de pantalla 2024-03-05 222919.png](Captura de pantalla 2024-03-05 222919.png)
+![Captura_de_pantalla_2024-03-05_222919.png](Captura_de_pantalla_2024-03-05_222919.png)
 
 Las siguientes líneas de código explican claramente cómo se creó el método de inicio de sesión y las validaciones que se implementarán. Además, se describe la funcionalidad para la creación del token de acceso, garantizando que solo los usuarios registrados puedan acceder al sistema.
 
@@ -273,7 +272,7 @@ En las siguientes lineas se mostrarán algunos códigos de diferentes endpoints 
 
 La siguiente imagen se puede visualizar el logueo de un usuario.
 
-![Captura de pantalla 2024-03-05 224851.png]({Captura de pantalla 2024-03-05 224851.png})
+![Captura de pantalla 2024-03-05 224851.png](Captura_de_pantalla_2024-03-05_224851.png)
 
 El siguiente método se define los números de elementos a mostrar en cada pagina, y el limite de elementos establecido por el usuario. El método consiste en visualizar todos los usuarios del sistema.
 
@@ -310,7 +309,6 @@ const getUser = async (req: Request, res: Response) => {
 
 En las siguientes imagenes la primera se muestra el intento de un usuario que busca visualizar todos los usuarios del sistema, y el sistema le rechasa la petición ya que no tiene el permiso para acceder a dicha peticione, la segunda el usuario con el permiso que tiene por ser super Admin del sistema consigue visualizar todos los usuarios del sistema.
 
-<img src="C:\Users\migue\OneDrive\Imágenes\Capturas de pantalla\tatu\Captura de pantalla 2024-03-05 222919" />
 ![Captura de pantalla 2024-03-05 225502.png](Captura_de_pantalla_2024-03-05_225502.png)
 
 Super Admin accediendo la visualización de los usuarios.
