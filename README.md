@@ -310,6 +310,7 @@ const getUser = async (req: Request, res: Response) => {
 
 En las siguientes imagenes la primera se muestra el intento de un usuario que busca visualizar todos los usuarios del sistema, y el sistema le rechasa la petición ya que no tiene el permiso para acceder a dicha peticione, la segunda el usuario con el permiso que tiene por ser super Admin del sistema consigue visualizar todos los usuarios del sistema.
 
+<img src="C:\Users\migue\OneDrive\Imágenes\Capturas de pantalla\tatu\Captura de pantalla 2024-03-05 222919" />
 ![Captura de pantalla 2024-03-05 225502.png](Captura_de_pantalla_2024-03-05_225502.png)
 
 Super Admin accediendo la visualización de los usuarios.
