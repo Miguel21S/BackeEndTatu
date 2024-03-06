@@ -40,6 +40,8 @@ alt="Express" />
 alt="TypeScript" />
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GITHUB" />
 <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT" />
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white" alt="POSTMAN" />
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="NPM">
 
 ## Descripción
 
@@ -71,39 +73,39 @@ Endpoints:
 
 Autenticación
 
-| Método | URI | Acción | Extra |
-| --- | --- | --- | --- |
-| POST | /api/auth/register | Registro de usuarios |  |
-| POST | /api/auth/login | Login de usuarios |  |
+| Método | URI | Acción |
+| --- | --- | --- |
+| POST | /api/auth/register | Registro de usuarios |
+| POST | /api/auth/login | Login de usuarios |
 
 Usuarios
 
-| Método | URI | Acción | Extra |
-| --- | --- | --- | --- |
-| GET | /api/users | Ver todos los usuarios (super_admin) |  |
-| GET | /api/users/profile | Ver perfil de usuario |  |
-| PUT | /api/users/profile | Modificar datos del perfil (al menos un campo) |  |
-| GET | /api/users?email=ejemplo@ejemplo.com | Filtrar usuario por email (super_admin) | SI |
-| DELETE | /api/users/{id} | Eliminar usuario (super_admin) | SI |
-| PUT | /api/users/{id}/role | Cambio de role (super_admin) | SI |
+| Método | URI | Acción |
+| --- | --- | --- |
+| GET | /api/users | Ver todos los usuarios (super_admin) |
+| GET | /api/users/profile | Ver perfil de usuario |
+| PUT | /api/users/profile | Modificar datos del perfil (al menos un campo) |
+| GET | /api/users?email=ejemplo@ejemplo.com | Filtrar usuario por email (super_admin) |
+| DELETE | /api/users/{id} | Eliminar usuario (super_admin) |
+| PUT | /api/users/{id}/role | Cambio de role (super_admin) |
 
 Citas
 
-| Método | URI | Acción | Extra |
-| --- | --- | --- | --- |
-| POST | /api/appointments | Crear cita |  |
-| PUT | /api/appointments | Actualizar mi cita |  |
-| GET | /api/appointments/{id} | Recuperar cita |  |
-| GET | /api/appointments | Ver mis propias citas |  |
+| Método | URI | Acción |
+| --- | --- | --- |
+| POST | /api/appointments | Crear cita |
+| PUT | /api/appointments | Actualizar mi cita |
+| GET | /api/appointments/{id} | Recuperar cita |
+| GET | /api/appointments | Ver mis propias citas |
 
 Servicios
 
-| Método | URI | Acción | Extra |
-| --- | --- | --- | --- |
-| GET | /api/services | Ver todos los servicios |  |
-| POST | /api/services | Crear servicio (super_admin) | SI |
-| PUT | /api/services/{id} | Modificar servicio (super_admin) | SI |
-| DELETE | /api/services/{id} | Eliminar servicio (super_admin) | SI |
+| Método | URI | Acción |
+| --- | --- | --- |
+| GET | /api/services | Ver todos los servicios |
+| POST | /api/services | Crear servicio (super_admin) |
+| PUT | /api/services/{id} | Modificar servicio (super_admin) |
+| DELETE | /api/services/{id} | Eliminar servicio (super_admin) |
 
 Otros aspectos requeridos:
 
@@ -149,22 +151,71 @@ VS Code: se eligió como el editor de código para la creación del proyecto.
 
 Para el desarrollo del proyecto, será necesario instalar las siguientes dependencias:
 
-- npm i typescript --save-dev
-- npm --init -y
-- npm i express --save
-- npm i @types/express @types/node -D
-- npm i dotenv
-- npm i typeorm --save
-- npm i reflect-metadata --save
-- npm i nodemon ts-node -D
-- npm i mysql2 --save
-- npm i bcrypt
-- npm i @types/bcrypt -D
-- npm i jsonwebtoken
-- npm i --save-dev @types/jsonwebtoken
+```
+npm i typescript --save-dev 
+```
+```
+npm --init -y
+```
+```
+npm i express --save
+```
+```
+npm i @types/express @types/node -D
+```
+```
+npm i dotenv
+```
+```
+npm i typeorm --save
+```
+```
+npm i reflect-metadata --save
+```
+```
+npm i nodemon ts-node -D
+```
+```
+npm i mysql2 --save
+```
+```
+npm i bcrypt
+```
+```
+npm i @types/bcrypt -D
+```
+```
+npm i jsonwebtoken
+```
+```
+npm i --save-dev @types/jsonwebtoken
+```
+
+## Para el funcionamieto de entrono local
+Se necesita seguir los siguientes pasos:
+Clonar repositorio
+
+```
+$ git clone https://github.com/Miguel21S/BackeEndTatu.git
+```
+Instalar la dependencia
+```
+$ npm install
+```
+Para crear las migraciones
+```
+$ npm run migrations-save
+```
+Para rellenar las tablas de base de datos
+```
+$ npm run seeders
+```
+Para la inicialización de la app
+```
+npm run dev
+```
 
 ## Puesta en Marcha del Proyecto
-
 Para el correcto funcionamiento del proyecto, se desarrollará varias clases, que se ilustrarán con ejemplos de código.
 
 El siguiente código es del método `registrar`
