@@ -196,7 +196,8 @@ Al desarrollar este código, se incorporaron algunas validaciones esenciales par
 
 La siguiente imagen muestra el registro de un usuario en el sistema.
 
-![Captura_de_pantalla_2024-03-05_222919.png](Captura_de_pantalla_2024-03-05_222919.png)
+
+<img src="./src/img/1.png">
 
 Las siguientes líneas de código explican claramente cómo se creó el método de inicio de sesión y las validaciones que se implementarán. Además, se describe la funcionalidad para la creación del token de acceso, garantizando que solo los usuarios registrados puedan acceder al sistema.
 
