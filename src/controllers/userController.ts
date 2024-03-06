@@ -1,8 +1,6 @@
 
 import { Request, Response } from "express";
 import { User } from "../models/User";
-import { Service } from "../models/Service";
-import { Appointment } from "../models/Appointment";
 
 // // // // MÉTODOS VER PERFIL DEL USUARIO
 const myPerfil = async (req: Request, res: Response) => {
@@ -38,6 +36,84 @@ const myPerfil = async (req: Request, res: Response) => {
                 error: error.message
             }
         )
+    }
+}
+
+//MÉTODO LISTAR USUARIOS
+const getUser = async (req: Request, res: Response) => {
+    try {
+        let limit = Number(req.query.limit) || 10
+        const page = Number(req.query.page) || 1
+        const skip = (page - 1) * limit
+        const users = await User.find({
+            select: {
+                id: true,
+                name: true,
+                lastname: true,
+                email: true
+            },
+            take: limit,
+            skip: skip
+        })
+        res.status(200).json({
+            success: true,
+            message: "Lista de usuario encontrado",
+            data: users
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Ocurrio un error al buscar usuario",
+            error: error
+        })
+    }
+}
+
+//MÉTODO BUSCAR USUARIO POR EMAIL
+const getUserByEmail = async (req: Request, res: Response) => {
+    try {
+        const email = req.query.email;
+        const name = req.query.name;
+
+        interface queryFiltersI {
+            email?: string
+            name?: string
+        }
+
+        let queryFilters: queryFiltersI = {}
+
+        if (email) {
+            queryFilters.email = email as string
+        }
+
+        if (name) {
+            queryFilters.name = name as string
+        }
+
+        const users = await User.find(
+            {
+                where: queryFilters,
+                select: {
+                    id: true,
+                    name: true,
+                    lastname: true,
+                    email: true,
+                    role_id: true
+                }
+            }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: "Usuario encontrado con suceso",
+            data: users
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error al buscar usuario",
+            error: error
+        })
     }
 }
 //MÉTODO EDITAR USUARIO POR PIRFIL (RETIFICAR)
@@ -87,232 +163,34 @@ const getupdateUser = async (req: Request, res: Response) => {
         })
     }
 }
-///// MÉTODO CREAR CITAS
-const Appointments = async (req: Request, res: Response) => {
+
+//MÉTODO DELETE USUARIO
+const deleteUserById = async (req: Request, res: Response) => {
     try {
-        // const user_id = req.params.id;
-        // const { user_id, services_id } = req.body
-        const user_id = req.tokenData.roleId;
-        const services_id = req.body.services_id;
+        const users = req.params.id;
 
-        const findUserId = await User.findOne(
+        const userToRemove: any = await User.findOneBy(
             {
-                where: {
-                    id: user_id
-                }
-            }
-        )
-        const findServices_id = await Service.findOne(
-            {
-                where: {
-                    id: services_id
-                }
+                id: parseInt(users)
             }
         )
 
-        if (!findUserId || !findServices_id) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "Usuario o Servicio no encontrado"
-                }
-            )
-        }
-
-        const cita = await Appointment.create(
-            {
-                user_id: user_id,
-                services_id: services_id
-            }
-        ).save()
-
+        const deletado = await User.delete(userToRemove);
+        
         res.status(200).json({
             success: true,
-            message: "Cita marcada con succeso"
+            message: "Usuario eliminado con suceso",
+            data: deletado
         })
-
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al crear la cita",
+            message: "Error al intentar eliminar usuario",
             error: error
         })
-    }
-}
-
-////////////////           MÉTODO BUSCAR CITAS
-const buscarCitaPorId = async (req: Request, res: Response) => {
-    try {
-        const id_user = req.tokenData.roleId;
-        const id_appointment = Number(req.params.id);
-
-        const findCita = await Appointment.findOne(
-            {
-                where: {
-                    id: id_appointment,
-                    user: {
-                        id:id_user
-                    }
-                },
-                select:{
-                    id: true,
-                    services_id: true,
-                    appointments_date: true
-                }
-            }
-        )
-
-        if (!findCita) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "No existe la cita"
-                }
-            )
-        }
-
-        // const findAppointments = await Appointment.findOne(
-        //     {
-        //         where: {
-        //             id: id_appointment
-        //         },
-        //         select:{
-        //             id:true,
-        //             services_id:true,
-        //             appointments_date:true
-        //         }
-        //     }
-        // )
-
-        res.status(200).json(
-            {
-                success: true,
-                message: "Cita encontrada con suceso",
-                data:findCita
-            }
-        )
-    } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Error al buscar la cita"
-            }
-        )
-
-    }
-}
-// // //MÉTODO ACTUALIZAR CITA
-const actualizarCita = async (req: Request, res: Response) => {
-    try {
-        const id_appointments = req.body.id;
-        const user_id = req.tokenData.roleId;
-        const services_id = req.body.services_id;
-
-        const findAppointment = await Appointment.findOne(
-            {
-                where: {
-                    id: id_appointments,
-                    user: { id: user_id },
-                }
-            }
-        )
-
-        if (!findAppointment) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "Datos introducidos no coinciden con los datos de la cosulta"
-                }
-            )
-        }
-
-        const actualizando = await Appointment.update(
-            {
-                id: id_appointments,
-                user: {
-                    id: user_id
-                },
-            },
-            {
-                id: id_appointments,
-                services_id: services_id
-            }
-        )
-        res.status(200).json(
-            {
-                success: true,
-                message: "Cita actualizada con suceso",
-                data: actualizando
-            }
-        )
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error al actualizar la cita",
-            error: error
-        })
-    }
-}
-
-//MÉTODO QUE LISTA TODOS LAS CITAS DE UN USUARIO LOGUIADO
-const misCitas = async (req: Request, res: Response) => {
-    try {
-        const user_id = req.tokenData.roleId;
-        const services_id = req.body.services_id;
-
-        const findUser = await User.findOne(
-            {
-                where: {
-                    id: user_id
-                }
-            }
-        )
-        const findServices = await Service.findOne(
-            {
-                where: {
-                    id: services_id
-                }
-            }
-        )
-
-        if (!findUser || !findServices) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "Citas no encotradas"
-                }
-            )
-        }
-        const findAllCitas = await Appointment.find(
-            {
-                where: {
-                    user: {
-                        id: user_id
-                    }
-                },
-            }
-        )
-
-        res.status(200).json(
-            {
-                success: true,
-                message: "Lista de citas encontradas",
-                data: findAllCitas
-            }
-        )
-    } catch (error: any) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Error en encontrar todas las citas",
-                error: error.message
-            }
-        )
-
     }
 }
 
 export {
-    myPerfil, getupdateUser, Appointments,
-    buscarCitaPorId, actualizarCita, misCitas
+    myPerfil, getUser, getUserByEmail, getupdateUser, deleteUserById
 }

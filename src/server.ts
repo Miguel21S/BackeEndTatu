@@ -2,8 +2,10 @@
 //////////////////////          IMPORTACIÓN DE LAS DEPENDENCIAS Y DE LOS FICHEROS
 import express, { Application } from 'express';
 import 'dotenv/config';
-import * as controllers from './controllers/superAdminControllers';
-import * as userControll from './controllers/userController';
+import * as userController from './controllers/userController';
+import * as rolesController from './controllers/roleControllers';
+import * as appointsController from './controllers/appointmenstControllers';
+import * as servicesController from './controllers/serviceControllers';
 import { AppDataSource } from './database/db';
 import { login, register, registerAdministradores } from './controllers/authController';
 import { auth } from './middlewares/auth';
@@ -22,29 +24,35 @@ app.use(express.json());
 // });
 
 //URL DE LA CLASE Controller
-app.get('/api/users', auth, isSuperAdmin, controllers.getUser);
-app.post('/api/roles/users',auth, controllers.crearRoles);
-app.get('/api', auth, isSuperAdmin, controllers.getUserByEmail);
-app.put('/api/users/:id', auth, isSuperAdmin, controllers.updateRoles);
-app.delete('/api/users/:id', auth, isSuperAdmin, controllers.deleteUserById);
-app.post('/api/services', auth, isSuperAdmin, controllers.crearServicio);
-app.put('/api/services/:id', auth, isSuperAdmin, controllers.editarServicio);
-app.delete('/api/services/:id', auth, isSuperAdmin, controllers.deleteServicio);
-app.delete('/api/role/:id', auth, isSuperAdmin, controllers.eliminarRole);
 
 //URL DE LA CLASE authController
 app.post('/api/auth/register', register)
 app.post('/api/auth/superadmin', auth, isSuperAdmin, registerAdministradores);
 app.post('/api/auth/login', login);
-app.get('/api/services', auth, controllers.getServices);
-app.get('/api/users/profile', auth, userControll.myPerfil);
+
+////////////////   URL DE LAS CLASES ROLES
+app.post('/api/roles/users',auth, rolesController.createRoles);
+app.put('/api/users/:id', auth, isSuperAdmin, rolesController.updateRoles);
+app.delete('/api/role/:id', auth, isSuperAdmin, rolesController.deleteRole);
 
 //URL DE LA CLASE userController
-app.put('/api/users/profile/:id', auth, isUser, userControll.getupdateUser);
-app.post('/api/appointments', auth, isUser, userControll.Appointments);
-app.get('/api/appointments/:id', auth, isUser, userControll.buscarCitaPorId);
-app.put('/api/appointments', auth, userControll.actualizarCita);
-app.get('/api/appointments', auth, userControll.misCitas);
+app.get('/api/users/profile', auth, userController.myPerfil);
+app.get('/api/users', auth, isSuperAdmin, userController.getUser);
+app.get('/api', auth, isSuperAdmin, userController.getUserByEmail);
+app.put('/api/users/profile/:id', auth, isUser, userController.getupdateUser);
+app.delete('/api/users/:id', auth, isSuperAdmin, userController.deleteUserById);
+
+//////////////////////// URL DE LOS SERVICIOS
+app.post('/api/services', auth, isSuperAdmin, servicesController.createServicio);
+app.get('/api/services', auth, servicesController.getServices);
+app.put('/api/services/:id', auth, isSuperAdmin, servicesController.updateServicio);
+app.delete('/api/services/:id', auth, isSuperAdmin, servicesController.deleteServicio);
+
+/////////////    URL DE LOS APPOINTMENTS
+app.post('/api/appointments', auth, isUser, appointsController.createAppointments);
+app.get('/api/appointments', auth, appointsController.myAppointments);
+app.get('/api/appointments/:id', auth, isUser, appointsController.searchAppointmentsPorId);
+app.put('/api/appointments', auth, appointsController.updateAppointments);
 
 //////////////    INIALIZACIÓN DE LA CONEXIÓN CON LA BASE DE DATOS
 AppDataSource.initialize()
