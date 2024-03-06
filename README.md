@@ -15,7 +15,17 @@ En este repositorio se encuentra una app que cumplen con certos requisitos de en
 
 ## Tecnologías
 
-TypeScript, TypeOrm, Mysql, Docker, Postman, Visual Studio Code 
+
+<img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
+alt="Docker"/>
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"
+alt="MySqls"/>
+<img src="https://img.shields.io/badge/NodeJs-339933?style=for-the-badge&logo=Node.js&logoColor=white"
+alt="Nodejs" />
+<img src="https://img.shields.io/badge/Express.js-335933?style=for-the-badge&logo=express&logoColor=white"
+alt="Express" />
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"
+alt="TypeScript" />
 
 ## Descripción
 
