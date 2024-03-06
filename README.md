@@ -149,50 +149,10 @@ Postman: se utilizó para probar los endpoints y enviar peticiones al sistema.
 
 VS Code: se eligió como el editor de código para la creación del proyecto.
 
-Para el desarrollo del proyecto, será necesario instalar las siguientes dependencias:
 
-```
-npm i typescript --save-dev 
-```
-```
-npm --init -y
-```
-```
-npm i express --save
-```
-```
-npm i @types/express @types/node -D
-```
-```
-npm i dotenv
-```
-```
-npm i typeorm --save
-```
-```
-npm i reflect-metadata --save
-```
-```
-npm i nodemon ts-node -D
-```
-```
-npm i mysql2 --save
-```
-```
-npm i bcrypt
-```
-```
-npm i @types/bcrypt -D
-```
-```
-npm i jsonwebtoken
-```
-```
-npm i --save-dev @types/jsonwebtoken
-```
-
-## Para el funcionamieto de entrono local
+## Para el funcionamieto en entorno local
 Se necesita seguir los siguientes pasos:
+
 Clonar repositorio
 
 ```
