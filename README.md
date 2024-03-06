@@ -90,7 +90,7 @@ La base de datos consta de cuatro tablas:
 
 Y la tabla migrations es donde se almacenan todas las migraciones de las tablas
 
-![tatu.png](tatu.png)
+<img src="./src/img/tatu.png">
 
 ## Estado del Proyecto
 
@@ -196,7 +196,6 @@ Al desarrollar este código, se incorporaron algunas validaciones esenciales par
 
 La siguiente imagen muestra el registro de un usuario en el sistema.
 
-
 <img src="./src/img/1.png">
 
 Las siguientes líneas de código explican claramente cómo se creó el método de inicio de sesión y las validaciones que se implementarán. Además, se describe la funcionalidad para la creación del token de acceso, garantizando que solo los usuarios registrados puedan acceder al sistema.
@@ -273,7 +272,7 @@ En las siguientes lineas se mostrarán algunos códigos de diferentes endpoints 
 
 La siguiente imagen se puede visualizar el logueo de un usuario.
 
-![Captura de pantalla 2024-03-05 224851.png](Captura_de_pantalla_2024-03-05_224851.png)
+<img src="./src/img/2.png">
 
 El siguiente método se define los números de elementos a mostrar en cada pagina, y el limite de elementos establecido por el usuario. El método consiste en visualizar todos los usuarios del sistema.
 
@@ -310,11 +309,11 @@ const getUser = async (req: Request, res: Response) => {
 
 En las siguientes imagenes la primera se muestra el intento de un usuario que busca visualizar todos los usuarios del sistema, y el sistema le rechasa la petición ya que no tiene el permiso para acceder a dicha peticione, la segunda el usuario con el permiso que tiene por ser super Admin del sistema consigue visualizar todos los usuarios del sistema.
 
-![Captura de pantalla 2024-03-05 225502.png](Captura_de_pantalla_2024-03-05_225502.png)
+<img src="./src/img/3.png">
 
 Super Admin accediendo la visualización de los usuarios.
 
-![Captura de pantalla 2024-03-05 225801.png](Captura_de_pantalla_2024-03-05_225801.png)
+<img src="./src/img/4.png">
 
 El siguiente método es para crear un tipo de role en la app, ya que los permisos se establece por roles de usuarios.
 
@@ -351,11 +350,11 @@ const crearRoles = async (req: Request, res: Response) => {
 
 En la imagen de abajo se puede ver la creación de un nuevo role.
 
-![Captura de pantalla 2024-03-05 232326.png](Captura_de_pantalla_2024-03-05_232326.png)
+<img src="./src/img/5.png">
 
 Se puede ver la creación del role en la tabla roles de la base de datos
 
-![Captura de pantalla 2024-03-05 232355.png](Captura_de_pantalla_2024-03-05_232355.png)
+<img src="./src/img/6.png">
 
 El siguiente método es de como eliminar un role el sistema. Para esto se recoge el id en una variable llama id_role, se busca el role y se comprueba que existe el tipo de role por el id, y si existe se elimina el role dentro del sistema.
 
@@ -395,7 +394,7 @@ const eliminarRole = async (req: Request, res: Response) => {
 
 La siguiente imagen muestra la comprovación de eliminación de un role.
 
-![Captura de pantalla 2024-03-05 232519.png](Captura_de_pantalla_2024-03-05_232519.png)
+<img src="./src/img/7.png">
 
 En la siguiente linea se mostra la creación del método filtrar usuario por email y nombre. Para este método se creo una interface y un objecto vacio de tipo queryFiltersI, y se comprueba su busqueda mediante método `find()`.
 
@@ -450,7 +449,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
 
 En la siguiente imagen se puede observar la filtración de un usuario por su email.
 
-![Captura de pantalla 2024-03-05 233217.png](Captura_de_pantalla_2024-03-05_233217.png)
+<img src="./src/img/8.png">
 
 El código que se muestra es del método visualizar perfil, para poder visualizar perfil se comprueba mendiante el token de usuario, ya que solo se puede visualizar su proprio perfil.
 
@@ -494,7 +493,7 @@ const myPerfil = async (req: Request, res: Response) => {
 
 Se puede visualizar la información del usuario desde su perfil, en la siguiente imagen.
 
-![Captura de pantalla 2024-03-05 233413.png](Captura_de_pantalla_2024-03-05_233413.png)
+<img src="./src/img/9.png">
 
 El siguiente método busca una cita pasando id de la cita como parametro, para esto también se necesita validar el usuario atraves del token de acceso, y se comprueba que solo se visualiza su cita no de otros usuarios del sistema.
 
@@ -549,7 +548,7 @@ const buscarCitaPorId = async (req: Request, res: Response) => {
 
 Se puede visualizar la cita buscada por id en la siguiente imagen.
 
-![Captura de pantalla 2024-03-05 234130.png](Captura_de_pantalla_2024-03-05_234130.png)
+<img src="./src/img/10.png">
 
 El siguiente método es de actualizar cita, que también requiere una validación por el token, para que solo el usuario logueado pueda actualizar su cita.
 
@@ -609,7 +608,7 @@ const actualizarCita = async (req: Request, res: Response) => {
 
 En la siguiente imagen se visualiza la confirmación de actualización de una cita 
 
-![Captura de pantalla 2024-03-05 234401.png](Captura_de_pantalla_2024-03-05_234401.png)
+<img src="./src/img/11.png">
 
 Los siguientes métodos son de los midleware.
 
@@ -724,7 +723,7 @@ app.listen(PORT, () => {
 
 La siguiente imagen muestra la estructura del proyecto con sus carpetas,
 
-![Captura de pantalla 2024-03-05 192339.png](Captura_de_pantalla_2024-03-05_192339.png)
+<img src="./src/img/Captura de pantalla 2024-03-05 192339.png">
 
 ## Autor:
 
