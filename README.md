@@ -1,13 +1,24 @@
 
-<a href="#gestión-de-citas-para-un-estudio-de-tatuajes">Gestión de citas para un estudio de tatuajes</a>
-<a href="#tecnologías">Tecnologías</a>
-<a href="#descripción">Descripción</a>
-<a href="#entregable-esperado">Entregable esperado</a>
-<a href="#estructura-y-diseño-de-la-base-de-datos-relacional">Estructura y diseño de la base de datos relacional</a>
-<a href="#estado-del-Proyecto">Estado del Proyectol</a>
-<a href="#descripción-de-las-tecnologías">Descripción de las tecnologías</a>
-<a href="#puesta-en-Marcha-del-Proyecto">Puesta en Marcha del Proyecto</a>
-<a href="#autor">Autor</a>
+<ul>
+<li> <a href="#gestión-de-citas-para-un-estudio-de-tatuajes">Gestión de citas para un estudio de tatuajes</a> </li>
+
+<li><a href="#tecnologías">Tecnologías</a> </li>
+
+<li> <a href="#descripción">Descripción</a> </li>
+
+<li><a href="#entregable-esperado">Entregable esperado</a>  </li>
+
+<li> <a href="#estructura-y-diseño-de-la-base-de-datos-relacional">Estructura y diseño de la base de datos relacional</a> </li>
+
+<li> <a href="#estado-del-Proyecto">Estado del Proyectol</a> </li>
+
+<li> <a href="#descripción-de-las-tecnologías">Descripción de las tecnologías</a> </li>
+
+<li> <a href="#puesta-en-Marcha-del-Proyecto">Puesta en Marcha del Proyecto</a> </li>
+
+<li> <a href="#autor">Autor</a> </li>
+
+</ul>
 
 # Gestión de citas para un estudio de tatuajes
 
