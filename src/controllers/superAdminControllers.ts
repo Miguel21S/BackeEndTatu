@@ -243,8 +243,7 @@ const crearServicio = async (req: Request, res: Response) => {
 //////////MÉTODO VER TODO LOS SERVICIOS
 const getServices = async (req: Request, res: Response) => {
     try {
-        const id_user = req.tokenData.roleId;
-
+        
         const getServicios = await Service.find(
             {
                 select: {

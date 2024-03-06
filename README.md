@@ -1,13 +1,25 @@
 
-<a href="#gestión-de-citas-para-un-estudio-de-tatuajes">Gestión de citas para un estudio de tatuajes</a>
-<a href="#tecnologías">Tecnologías</a>
-<a href="#descripción">Descripción</a>
-<a href="#entregable-esperado">Entregable esperado</a>
-<a href="#estructura-y-diseño-de-la-base-de-datos-relacional">Estructura y diseño de la base de datos relacional</a>
-<a href="#estado-del-Proyecto">Estado del Proyectol</a>
-<a href="#descripción-de-las-tecnologías">Descripción de las tecnologías</a>
-<a href="#puesta-en-Marcha-del-Proyecto">Puesta en Marcha del Proyecto</a>
-<a href="#autor">Autor</a>
+<img src="./src/img/imagenDeTatu.png">
+<ul>
+<li> <a href="#gestión-de-citas-para-un-estudio-de-tatuajes">Gestión de citas para un estudio de tatuajes</a> </li>
+
+<li><a href="#tecnologías">Tecnologías</a> </li>
+
+<li> <a href="#descripción">Descripción</a> </li>
+
+<li><a href="#entregable-esperado">Entregable esperado</a>  </li>
+
+<li> <a href="#estructura-y-diseño-de-la-base-de-datos-relacional">Estructura y diseño de la base de datos relacional</a> </li>
+
+<li> <a href="#estado-del-Proyecto">Estado del Proyectol</a> </li>
+
+<li> <a href="#descripción-de-las-tecnologías">Descripción de las tecnologías</a> </li>
+
+<li> <a href="#puesta-en-Marcha-del-Proyecto">Puesta en Marcha del Proyecto</a> </li>
+
+<li> <a href="#autor">Autor</a> </li>
+
+</ul>
 
 # Gestión de citas para un estudio de tatuajes
 
@@ -15,7 +27,17 @@ En este repositorio se encuentra una app que cumplen con certos requisitos de en
 
 ## Tecnologías
 
-TypeScript, TypeOrm, Mysql, Docker, Postman, Visual Studio Code 
+
+<img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
+alt="Docker"/>
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"
+alt="MySqls"/>
+<img src="https://img.shields.io/badge/NodeJs-339933?style=for-the-badge&logo=Node.js&logoColor=white"
+alt="Nodejs" />
+<img src="https://img.shields.io/badge/Express.js-335933?style=for-the-badge&logo=express&logoColor=white"
+alt="Express" />
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"
+alt="TypeScript" />
 
 ## Descripción
 
