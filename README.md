@@ -1,4 +1,5 @@
 
+<img src="./src/img/imagenDeTatu.png">
 <ul>
 <li> <a href="#gestión-de-citas-para-un-estudio-de-tatuajes">Gestión de citas para un estudio de tatuajes</a> </li>
 

@@ -2,7 +2,7 @@
 //////////////////////          IMPORTACIÓN DE LAS DEPENDENCIAS Y DE LOS FICHEROS
 import express, { Application } from 'express';
 import 'dotenv/config';
-import * as controllers from './controllers/controllers';
+import * as controllers from './controllers/superAdminControllers';
 import * as userControll from './controllers/userController';
 import { AppDataSource } from './database/db';
 import { login, register, registerAdministradores } from './controllers/authController';
