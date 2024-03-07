@@ -13,11 +13,12 @@ import { Service } from '../models/Service';
 
 export const AppDataSource = new DataSource({
     type: "mysql",
-    host: "localhost",
-    port: 3310,
-    username: "root",
-    password: "2345",
-    database: "gestion_de_citas",
+    host: process.env.BD_HOST || "localhost",
+    port: Number(process.env.DB_PORT) || 3308,
+    username: process.env.DB_USER || "raiz",
+    password: process.env.DB_PASSWORD || "4785",
+    database: process.env.DB_DATABASE || "tatus",
+
     entities: [Role, User, Appointment, Service],
     migrations:[Roles1708988550093, Users1709066205859, Services1709070844619, Appointments1709073378814],
     synchronize: false,
