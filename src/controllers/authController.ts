@@ -12,7 +12,7 @@ export const register = async (req: Request, res: Response) => {
         const email = req.body.email;
         const password = req.body.password
 
-        if ((password.length < 6) && (password.length > 10)) {
+        if ((password.length < 6) || (password.length > 10)) {
             return res.status(400).json({
                 success: false,
                 message: "La contraseña tiene que ser mayor que 7 y menor que 20"
@@ -152,7 +152,7 @@ export const login = async (req: Request, res: Response) => {
                 message: "Datos invalidos"
             })
          }
-        const validarPassword = bcrypt.compareSync(password, user.password);
+        const validarPassword = bcrypt.compareSync(password, user!.password);
         if(!validarPassword){
             return res.status(400).json({
                 success: false,

@@ -15,7 +15,10 @@
     "start": "node ./dist/server.js",
     "migrations-save": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
     "revert-migrations": "npx typeorm-ts-node-commonjs migration:revert -d ./src/database/db.ts",
-    "seed": "ts-node ./src/database/seeders/seeder.ts",
+    "seed-roles": "ts-node ./src/database/seeders/seederRoles.ts",
+    "seed-services": "ts-node ./src/database/seeders/seederServices.ts",
+    "seed-users": "ts-node ./src/database/seeders/seederUsers.ts",
+    "seed-appoits": "ts-node ./src/database/seeders/seederAppoitments.ts",
     "npx-create-table": "typeorm migration:create ./src/database/migrations/nombre de la tabla"
   },
   "devDependencies": {
